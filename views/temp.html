@@ -1,0 +1,142 @@
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/static/temp.css">
+    <link rel="stylesheet" href="/static/style.css">
+    <title>Cart</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+
+    <div class="nav">
+        <nav>
+            <ul class="nav">
+                <li class="navitem">
+                    <a class="navlink" href="/">Home</a>
+                </li>
+                <% if(session.user) { %>
+                    <li class="navitem">
+                        <a class="navlink" href="/logout">Logout</a>
+                    </li>
+                    <li class="navitem">
+                        <a class="navlink" href="/customer/order">My Orders</a>
+                    </li>
+                    <% } else { %>
+                        <li class="navitem">
+                            <a class="navlink" href="/signup">Sign Up</a>
+                        </li>
+                        <li class="navitem">
+                            <a class="navlink" href="/login">login</a>
+                        </li>
+                        <% } %>
+                            <li class="navitem">
+                                <a class="navlink disabled" href="/cart">
+                                    <span id="cartCounter">
+                                        <%= session.cart ? session.cart.totalQty :''%>
+                                    </span>
+                                </a>
+                            </li>
+            </ul>
+        </nav>
+    </div>
+
+    <main>
+
+        <% if(session.cart) { %>
+        <div class="basket">
+            <div class="basket-labels">
+                <ul>
+                    <li class="item item-heading">Item</li>
+                    <li class="price">Price</li>
+                    <li class="quantity">Quantity</li>
+                    <li class="subtotal">Subtotal</li>
+                </ul>
+            </div>
+            <div>
+                <% for(let product of Object.values(session.cart.items)) { %>
+                    <div class="basket-product">
+                        <div class="item">
+                            <div class="product-image">
+                                <img src="<%=product.item.FrontImage%>" alt="Error In Displaying Images"
+                                    class="product-frame">
+                            </div>
+                            <div class="product-details">
+                                <h1><strong><span class="item-quantity"><%= product.qty%>
+                                        </span> x <%= product.item.ProductName%></strong>
+                                </h1>
+                                <p><strong>
+                                        <%= product.item.Dimension %>
+                                    </strong></p>
+                                <p>Product Code - <%=product.item.ProductCode %>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="price">
+                            &#8377;<%= product.item.Price %>
+                        </div>
+                        <div class="quantity">
+                            <b><%= product.qty %></b>
+                           
+                        </div>
+                        <div class="subtotal">&#8377; <%= product.item.Price * product.qty %></div>
+                        <div class="remove">
+                            <button data-products="<%= JSON.stringify(product)%>" class="cart-remove-item">Remove</button>
+                        </div>
+                    </div>
+                    <% } %>
+            </div>
+
+        </div>
+        <aside>
+            <div class="summary">
+                <div class="summary-total-items"><span class="total-items"></span> Items in your Bag</div>
+                <div class="summary-subtotal">
+                    <div class="subtotal-title">Subtotal</div>
+                    <div class="subtotal-value final-value" id="basket-subtotal"><%= session.cart.totalPrice %></div>
+                    <div class="summary-promo hide">
+                        <div class="promo-title">Promotion</div>
+                        <div class="promo-value final-value" id="basket-promo"></div>
+                    </div>
+                </div>
+                <!-- <div class="summary-delivery">
+                    <select name="delivery-collection" class="summary-delivery-selection">
+                        <option value="0" selected="selected">Select Collection or Delivery</option>
+                        <option value="collection">Collection</option>
+                        <option value="first-class">Royal Mail 1st Class</option>
+                        <option value="second-class">Royal Mail 2nd Class</option>
+                        <option value="signed-for">Royal Mail Special Delivery</option>
+                    </select>
+                </div> -->
+                <div class="summary-total">
+                    <div class="total-title">Total</div>
+                    <div class="total-value final-value" id="basket-total"><%=session.cart.totalPrice%></div>
+                </div>
+                <% if(session.user) { %>
+                <div class="summary-checkout">
+                    <a href="/checkout">
+                        <button class="checkout-cta">Go to Secure Checkout</button>
+                    </a>
+                </div>
+                <% } else { %>
+                    <div class="summary-checkout">
+                        <a href="/login">
+                            <button class="checkout-cta">Go to Login</button>
+                        </a>
+                    </div>
+                    <% } %>
+            </div>
+        </aside>
+        <% } else { %>
+            <p>empty cart</p>
+            <% } %>  
+    </main>
+
+    <script src="/static/temp.js"></script>
+</body>
+
+</html>

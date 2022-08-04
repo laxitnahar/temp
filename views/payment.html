@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout</title>
+
+    <link rel="stylesheet" href="/static/style.css">
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" rel="stylesheet">
+
+
+</head>
+
+<body>
+    <!-- <div>
+        <form action="/checkout" method="POST">
+            <input type="text" class="box" id="phone" name="phone" placeholder="phone Number" required />
+            <br>
+            <input type="text" class="box" id="address" name="address" placeholder="Address" required />
+            <br>
+            <input type="submit" value="Submit" id="submit" />
+        </form>
+    </div> -->
+
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+    <button id="rzp-button1">Pay</button>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        axios.post('/paymen').then(info => {
+            console.log(info)
+            console.log('hi')
+            var options = {
+                "key": "rzp_test_99Kx2xlSYCl4cU", // Enter the Key ID generated from the Dashboard // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+                "name": "Acme Corp",
+                "description": "Test Transaction",
+                "order_id": info.data.id,
+            //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+                "callback_url": "/is-order-complete"
+            };
+
+            var rzp1 = new Razorpay(options);
+            console.log('open')
+            document.getElementById('rzp-button1').onclick = function (e) {
+                rzp1.open();
+                e.preventDefault();
+            }
+
+        })
+    </script>
+
+
+</body>
+
+</html>

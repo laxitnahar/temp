@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/login.css">
+    <link rel="stylesheet" href="/static/style.css">
+
+</head>
+
+<body>
+
+    <!-- <div>
+        <form action="/login" method="POST">
+            <input type="text" class="box" id="email" name="email" placeholder="Email" required />
+            <br>
+            <input type="password" class="box" id="password" name="password" placeholder="Password" required />
+            <br>
+            <input type="submit" value="Submit" id="submit" />
+        </form>
+    </div> -->
+
+
+
+    <section class="vh-100" style="background-color: #eee;">
+
+        <div class="nav">
+            <nav>
+                
+                <ul class="nav">
+                    <li class="navitem">
+                        <a class="navlink" href="/">Home</a>
+                    </li>
+                    <% if(session.user) { %>
+                        <li class="navitem">
+                            <a class="navlink" href="/logout">Logout</a>
+                        </li>
+                        <li class="navitem">
+                            <a class="navlink" href="/customer/order">My Orders</a>
+                        </li>
+                        <% } else { %>
+                            <li class="navitem">
+                                <a class="navlink" href="/signup">Sign Up</a>
+                            </li>
+                            <li class="navitem">
+                                <a class="navlink" href="/login">login</a>
+                            </li>
+                            <% } %>
+                                <li class="navitem">
+                                    <a class="navlink" href="/cart">
+                                        
+                                        <span>
+                                            <%= session.cart ? session.cart.totalQty :''%>
+                                        </span>
+                                    </a>
+                                </li>
+                </ul>
+            </nav>
+        </div>
+    
+
+        <div class="container py-5 h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col col-xl-10">
+                    <!-- class="card" -->
+                    <div style="border-radius: 1rem; background-color: #eee;">
+                        <div class="row g-0">
+                            <div class="col-md-6 col-lg-5 d-none d-md-block">
+                                <img src="http://vintagemango.com/logo.png" alt="login form" class="rounded mx-auto d-block img-fluid"
+                                    style="border-radius: 1rem 0 0 1rem; margin-top: 75px; margin-left: 100px;" />
+                                    <div class="t">
+                                        Registering for this site allows you to access your order status and history. Just fill in the fields below, and we'll get a new account set up for you in no time. We will only ask you for information necessary to make the purchase process faster and easier
+                                    </div>
+                            </div>
+                            <div class="col-md-6 col-lg-7 d-flex align-items-center">
+                                <div class="card-body p-4 p-lg-5 text-black">
+
+                                    <form action="/login" method="POST">
+
+                                        <!-- <div class="d-flex align-items-center mb-3 pb-1">
+                                            <i class="fas fa-cubes fa-2x me-3" style="color: #ff6219;"></i>
+                                            <span class="h1 fw-bold mb-0">Logo</span>
+                                        </div> -->
+
+                                        <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Sign into your
+                                            account</h5>
+                                        <% if(messages.error) {%>
+                                        <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px; color: red;"><%= messages.error %></h5>
+                                            <% } %>
+
+                                        <div class="form-outline mb-2">
+                                            <input type="email" id="form2Example17" id="email" name="email" 
+                                                class="form-control form-control-lg" required/>
+                                            <label class="form-label" for="form2Example17">Email address</label>
+                                        </div>
+
+                                        <div class="form-outline mb-2">
+                                            <input type="password" id="form2Example27" name="password" id="password"
+                                                class="form-control form-control-lg" required/>
+                                            <label class="form-label" for="form2Example27">Password</label>
+                                        </div>
+
+                                        <div class="pt-1 mb-4">
+                                            <button class="btn btn-dark btn-lg btn-block" type="submit">LOGIN</button>
+                                        </div>
+
+                                        
+                                        <p class="mb-5 pb-lg-2" style="color: #393f81;">Don't have an account? <a
+                                                href="/signup" style="color: #393f81;">Register here</a></p>
+                                        <a href="#!" class="small text-muted">Terms of use.</a>
+                                        <a href="#!" class="small text-muted">Privacy policy</a>
+                                    </form>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>

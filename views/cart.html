@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <section>
+        <div>
+            order summary
+        </div>
+        <div>
+            <% for(let product of Object.values(session.cart.items)) { %>
+            <div>
+                <div>
+                    <h1><%= product.item.name%></h1>
+                </div>
+                <span><%= product.item.Price%></span>
+                <span><%= product.qty  %> </span>
+            </div>
+            <% } %>
+        </div>
+        <hr>
+        <div>
+            <span><%= session.cart.totalPrice %></span>
+            <span></span>
+        </div>
+        <div>
+            <form action="">
+                <input type="text" name="phno" id="phno" placeholder="Phone NUmber">
+                <br>
+                <input type="text" name="address" id="address" placeholder="address">
+
+                <button type="submit">Order now</button>
+            </form>
+        </div>
+        <!-- <a href="">Login to Continue</a> -->
+    </section>
+</body>
+</body>
+</html>

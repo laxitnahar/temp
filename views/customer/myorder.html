@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="/static/temp.css">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="nav">
+        <nav>
+            <ul class="nav">
+                <li class="navitem">
+                    <a class="navlink" href="/">Home</a>
+                </li>
+                <% if(session.user) { %>
+                    <li class="navitem">
+                        <a class="navlink" href="/logout">Logout</a>
+                    </li>
+                    <li class="navitem">
+                        <a class="navlink" href="/customer/order">My Orders</a>
+                    </li>
+                    <% } else { %>
+                        <li class="navitem">
+                            <a class="navlink" href="/signup">Sign Up</a>
+                        </li>
+                        <li class="navitem">
+                            <a class="navlink" href="/login">login</a>
+                        </li>
+                        <% } %>
+                            <li class="navitem">
+                                <a class="navlink disabled" href="/cart">
+                                    <span id="cartCounter">
+                                        <%= session.cart ? session.cart.totalQty :''%>
+                                    </span>
+                                </a>
+                            </li>
+            </ul>
+        </nav>
+    </div>
+
+    <main>
+
+        <div class="basket">
+            <div class="basket-labels">
+                <ul>
+                    <li class="item item-heading">Item</li>
+                    <li class="price">Price</li>
+                    <li class="quantity">Quantity</li>
+                    <li class="subtotal">Subtotal</li>
+                </ul>
+            </div>
+            <div>
+                <% for(let product of Object.values(a)) { %>
+                    <div class="basket-product">
+                        <div class="item">
+                            <div class="product-image">
+                                <img src="<%=product.item.FrontImage%>" alt="Error In Displaying Images"
+                                    class="product-frame">
+                            </div>
+                            <div class="product-details">
+                                <h1><strong><span class="item-quantity"><%= product.qty%>
+                                        </span> x <%= product.item.ProductName%></strong>
+                                </h1>
+                                <p><strong>
+                                        <%= product.item.Dimension %>
+                                    </strong></p>
+                                <p>Product Code - <%=product.item.ProductCode %>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="price">
+                            &#8377;<%= product.item.Price %>
+                        </div>
+                        <div class="quantity">
+                            <b><%= product.qty %></b>
+                           
+                        </div>
+                        <div class="subtotal">&#8377; <%= product.item.Price * product.qty %></div>
+                        <!-- <div class="remove">
+                            <button>Remove</button>
+                        </div> -->
+                    </div>
+                    <% } %>
+            </div>
+
+            <div>
+                <h1 class="detail"><b> Billing Details </b></h1>
+                <div class="det">
+                    Address:<%= order.address %>
+                </div>
+                <div class="det">
+                    Phone Number:<%= order.phone %>
+                </div>
+            </div>
+        </div>
+        
+        
+            
+        
+    </main>
+</body>
+</html>
