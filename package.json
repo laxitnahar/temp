@@ -29,6 +29,9 @@
     "nodemon": "^2.0.19",
     "razorpay": "^2.8.2"
   },
+  "engines": {
+    "node": "6.11.1"
+  },
   "devDependencies": {
     "parcel-bundler": "^1.12.5"
   }
