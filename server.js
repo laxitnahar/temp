@@ -42,6 +42,15 @@ app.use(session({
 
 }))
 
+app.use((req, res, next) => {
+    res.locals.session = req.session
+    let h = res.locals.session
+    let q = req.session.user
+    // console.log(h)
+    // console.log(q)
+    next()
+})
+
 app.post('/paymen',(req,resp)=>{
 
  
@@ -102,8 +111,6 @@ const { json } = require("body-parser");
 
 
 
-
-
 app.use("/static", express.static('./static/'));
 
 app.use(flash())
@@ -155,16 +162,9 @@ app.post('/update-cart', (req, resp) => {
 
 
 
-app.use((req, res, next) => {
-    res.locals.session = req.session
-    let h = res.locals.session
-    let q = req.session.user
-    // console.log(h)
-    // console.log(q)
-    next()
-})
 
-//login Form for user
+
+
 app.post("/login", async (req, resp) => {
     var email = req.body.email
     var password = req.body.password
