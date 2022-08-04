@@ -10,7 +10,6 @@ const cloudinary = require("cloudinary").v2;
 const cors = require('cors')
 const dotenv = require('dotenv')
 dotenv.config()
-mongoose.Promise = global.Promise;
 
 
 const PORT = process.env.PORT || 13000
@@ -27,7 +26,7 @@ const razorpay = new Razorpay({
     key_secret:'L3yiJRYsLb9RbuUBMZ2BEcpi'
 })
 
-const url = 'mongodb://localhost:27017/intern'
+const url = process.env.MONGO_URL
 mongoose.connect(url, {
     useNewUrlParser: true,
     useUnifiedTopology: true
