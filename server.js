@@ -481,6 +481,6 @@ app.post('/admin/product/update/:id', async(req, resp) => {
         resp.render('notfound')
     })
 })
-app.listen(PORT, () => {
+app.listen(PORT, '0.0.0.0',() => {
     console.log("Server Running");
 })
