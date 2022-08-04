@@ -27,7 +27,7 @@ const razorpay = new Razorpay({
     key_secret:'L3yiJRYsLb9RbuUBMZ2BEcpi'
 })
 
-const url = process.env.MONGO_URL
+const url = 'mongodb://localhost:27017/intern'
 mongoose.connect(url, {
     useNewUrlParser: true,
     useUnifiedTopology: true
