@@ -170,8 +170,7 @@ app.post("/login", async (req, resp) => {
     var password = req.body.password
 
     const user = await Register.findOne({ email: email })
-    if (user != null) {
-        if (password === user.password) {
+        if (user != null && password === user.password) {
             if (req.session.user == null) {
                 req.session.user = user
                 if (req.session.user.role === 'admin') {
@@ -181,14 +180,13 @@ app.post("/login", async (req, resp) => {
                 }
             }
 
-        }
-        else {
+        }else {
             req.flash('error', 'password Wrong')
             console.log("User Not Found")
             resp.redirect('/login')
 
         }
-    }
+        
 })
 
 
