@@ -10,6 +10,8 @@ const cloudinary = require("cloudinary").v2;
 const cors = require('cors')
 const dotenv = require('dotenv')
 dotenv.config()
+mongoose.Promise = global.Promise;
+
 
 const PORT = process.env.PORT || 13000
 const app = express();
@@ -482,6 +484,6 @@ app.post('/admin/product/update/:id', async(req, resp) => {
         resp.render('notfound')
     })
 })
-app.listen(process.env.PORT || 15000, () => {
+app.listen(PORT, () => {
     console.log("Server Running");
 })
