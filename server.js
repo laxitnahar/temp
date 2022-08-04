@@ -1,13 +1,11 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-const jwt = require("jsonwebtoken")
 const session = require('express-session');
 const flash = require("express-flash");
 const MongoDbStore = require("connect-mongo");
 const mongoose = require("mongoose")
 const fileUpload = require('express-fileupload')
 const cloudinary = require("cloudinary").v2;
-const cors = require('cors')
 const dotenv = require('dotenv')
 dotenv.config()
 
