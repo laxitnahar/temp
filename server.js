@@ -425,6 +425,6 @@ app.post('/admin/product/update/:id', async (req, resp) => {
 
 require('./backend/routes/web')(app)
 
-app.listen(PORT, '0.0.0.0', () => {
+app.listen(PORT, () => {
     console.log("Server Running");
 })
