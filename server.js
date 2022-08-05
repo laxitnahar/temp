@@ -318,57 +318,57 @@ app.post('/admin/order/status', (req, resp) => {
 })
 
 //Add Product -- Admin Only
-app.post('/admin/product', async (req, resp) => {
-    const file = req.files.BackgroundImage
-    cloudinary.uploader.upload(file.tempFilePath, async (err, result) => {
-        console.log(result)
-        const fileTwo = req.files.FrontImage
-        cloudinary.uploader.upload(fileTwo.tempFilePath, async (err, res) => {
-            console.log(res)
-            var ProductName = req.body.ProductName
-            var Navigate = req.body.Navigate
-            var ProductHeading = req.body.ProductHeading
-            var Price = req.body.Price
-            var BackgroundImage = result.url
-            var FrontImage = res.url
-            var ProductDescription = req.body.ProductDescription
-            var ProductCode = req.body.ProductCode
-            var Material = req.body.Material
-            var Style = req.body.Style
-            var Color = req.body.Color
-            var Dimension = req.body.Dimension
-            var WoodSpecies = req.body.WoodSpecies
-            var ProductDetail = req.body.ProductDetail
-            var Type = req.body.Type
+// app.post('/admin/product', async (req, resp) => {
+//     const file = req.files.BackgroundImage
+//     cloudinary.uploader.upload(file.tempFilePath, async (err, result) => {
+//         console.log(result)
+//         const fileTwo = req.files.FrontImage
+//         cloudinary.uploader.upload(fileTwo.tempFilePath, async (err, res) => {
+//             console.log(res)
+//             var ProductName = req.body.ProductName
+//             var Navigate = req.body.Navigate
+//             var ProductHeading = req.body.ProductHeading
+//             var Price = req.body.Price
+//             var BackgroundImage = result.url
+//             var FrontImage = res.url
+//             var ProductDescription = req.body.ProductDescription
+//             var ProductCode = req.body.ProductCode
+//             var Material = req.body.Material
+//             var Style = req.body.Style
+//             var Color = req.body.Color
+//             var Dimension = req.body.Dimension
+//             var WoodSpecies = req.body.WoodSpecies
+//             var ProductDetail = req.body.ProductDetail
+//             var Type = req.body.Type
 
-            const newProduct = new Product({
-                ProductName: ProductName,
-                Navigate: Navigate,
-                ProductHeading: ProductHeading,
-                Price: Price,
-                BackgroundImage: BackgroundImage,
-                FrontImage: FrontImage,
-                ProductDescription: ProductDescription,
-                ProductCode: ProductCode,
-                Material: Material,
-                Style: Style,
-                Color: Color,
-                Dimension: Dimension,
-                WoodSpecies: WoodSpecies,
-                ProductDetail: ProductDetail,
-                Type: Type
-            })
+//             const newProduct = new Product({
+//                 ProductName: ProductName,
+//                 Navigate: Navigate,
+//                 ProductHeading: ProductHeading,
+//                 Price: Price,
+//                 BackgroundImage: BackgroundImage,
+//                 FrontImage: FrontImage,
+//                 ProductDescription: ProductDescription,
+//                 ProductCode: ProductCode,
+//                 Material: Material,
+//                 Style: Style,
+//                 Color: Color,
+//                 Dimension: Dimension,
+//                 WoodSpecies: WoodSpecies,
+//                 ProductDetail: ProductDetail,
+//                 Type: Type
+//             })
 
-            await newProduct.save().then((product) => {
-                resp.redirect('/admin')
-            }).catch(err => {
-                resp.redirect('/')
-            })
+//             await newProduct.save().then((product) => {
+//                 resp.redirect('/admin')
+//             }).catch(err => {
+//                 resp.redirect('/')
+//             })
 
-        })
+//         })
 
-    })
-})
+//     })
+// })
 
 app.post('/admin/product/update/:id', async (req, resp) => {
     console.log(req.body)
