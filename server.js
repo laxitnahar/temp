@@ -40,7 +40,7 @@ const connection = mongoose.connection;
 app.use(session({
     secret: 'secretcode',
     resave: false,
-    store: MongoDbStore.create({ mongoUrl: 'mongodb://localhost:27017/intern' }),
+    store: MongoDbStore.create({ mongoUrl: process.env.MONGO_URL }),
     saveUninitialized: false,
     cookie: { maxAge: 1000 * 60 * 60 * 24 }
 
