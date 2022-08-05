@@ -9,7 +9,7 @@ const cloudinary = require("cloudinary").v2;
 const Razorpay = require('razorpay');
 const dotenv = require('dotenv')
 dotenv.config()
-
+mongoose.Promise = global.Promise;
 
 const PORT = process.env.PORT || 13000
 const app = express();
