@@ -370,41 +370,41 @@ app.post('/admin/order/status', (req, resp) => {
 //     })
 // })
 
-app.post('/admin/product/update/:id', async (req, resp) => {
-    console.log(req.body)
-    var ProductName = req.body.ProductName
-    var Navigate = req.body.Navigate
-    var ProductHeading = req.body.ProductHeading
-    var Price = req.body.Price
-    var ProductDescription = req.body.ProductDescription
-    var ProductCode = req.body.ProductCode
-    var Material = req.body.Material
-    var Style = req.body.Style
-    var Color = req.body.Color
-    var Dimension = req.body.Dimension
-    var WoodSpecies = req.body.WoodSpecies
-    var ProductDetail = req.body.ProductDetail
-    var Type = req.body.Type
-    await Product.updateOne({ _id: req.params.id }, {
-        ProductName: ProductName,
-        Navigate: Navigate,
-        ProductHeading: ProductHeading,
-        Price: Price,
-        ProductDescription: ProductDescription,
-        ProductCode: ProductCode,
-        Material: Material,
-        Style: Style,
-        Color: Color,
-        Dimension: Dimension,
-        WoodSpecies: WoodSpecies,
-        ProductDetail: ProductDetail,
-        Type: Type
-    }).then(() => {
-        resp.redirect('/admin')
-    }).catch(err => {
-        resp.render('notfound')
-    })
-})
+// app.post('/admin/product/update/:id', async (req, resp) => {
+//     console.log(req.body)
+//     var ProductName = req.body.ProductName
+//     var Navigate = req.body.Navigate
+//     var ProductHeading = req.body.ProductHeading
+//     var Price = req.body.Price
+//     var ProductDescription = req.body.ProductDescription
+//     var ProductCode = req.body.ProductCode
+//     var Material = req.body.Material
+//     var Style = req.body.Style
+//     var Color = req.body.Color
+//     var Dimension = req.body.Dimension
+//     var WoodSpecies = req.body.WoodSpecies
+//     var ProductDetail = req.body.ProductDetail
+//     var Type = req.body.Type
+//     await Product.updateOne({ _id: req.params.id }, {
+//         ProductName: ProductName,
+//         Navigate: Navigate,
+//         ProductHeading: ProductHeading,
+//         Price: Price,
+//         ProductDescription: ProductDescription,
+//         ProductCode: ProductCode,
+//         Material: Material,
+//         Style: Style,
+//         Color: Color,
+//         Dimension: Dimension,
+//         WoodSpecies: WoodSpecies,
+//         ProductDetail: ProductDetail,
+//         Type: Type
+//     }).then(() => {
+//         resp.redirect('/admin')
+//     }).catch(err => {
+//         resp.render('notfound')
+//     })
+// })
 
 require('./backend/routes/web')(app)
 
