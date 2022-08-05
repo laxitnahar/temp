@@ -166,7 +166,29 @@ app.post('/update-cart', (req, resp) => {
 
 
 
+app.post("/login", async (req, resp) => {
+    var email = req.body.email
+    var password = req.body.password
 
+    const user = await Register.findOne({ email: email })
+    if (user != null && password === user.password) {
+        if (req.session.user == null) {
+            req.session.user = user
+            if (req.session.user.role === 'admin') {
+                resp.redirect('/admin')
+            } else {
+                resp.redirect('/')
+            }
+        }
+
+    } else {
+        req.flash('error', 'password Wrong')
+        console.log("User Not Found")
+        resp.redirect('/login')
+
+    }
+
+})
 
 app.post('/modify-cart', (req, resp) => {
 
@@ -188,6 +210,23 @@ app.post('/modify-cart', (req, resp) => {
 })
 
 
+app.post("/add-product", async (req, resp) => {
+    var name = req.body.name;
+    var price = req.body.price;
+    var description = req.body.description;
+
+    const addProduct = new Product({
+        name: name,
+        price: price,
+        description: description
+    })
+
+    const added = await addProduct.save()
+
+    resp.render('signup_success')
+
+})
+/
 //Sign Up form 
 app.post("/sign_up", async (req, resp) => {
     var username = req.body.username
