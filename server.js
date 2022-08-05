@@ -166,29 +166,29 @@ app.post('/update-cart', (req, resp) => {
 
 
 
-app.post("/login", async (req, resp) => {
-    var email = req.body.email
-    var password = req.body.password
+// app.post("/login", async (req, resp) => {
+//     var email = req.body.email
+//     var password = req.body.password
 
-    const user = await Register.findOne({ email: email })
-    if (user != null && password === user.password) {
-        if (req.session.user == null) {
-            req.session.user = user
-            if (req.session.user.role === 'admin') {
-                resp.redirect('/admin')
-            } else {
-                resp.redirect('/')
-            }
-        }
+//     const user = await Register.findOne({ email: email })
+//     if (user != null && password === user.password) {
+//         if (req.session.user == null) {
+//             req.session.user = user
+//             if (req.session.user.role === 'admin') {
+//                 resp.redirect('/admin')
+//             } else {
+//                 resp.redirect('/')
+//             }
+//         }
 
-    } else {
-        req.flash('error', 'password Wrong')
-        console.log("User Not Found")
-        resp.redirect('/login')
+//     } else {
+//         req.flash('error', 'password Wrong')
+//         console.log("User Not Found")
+//         resp.redirect('/login')
 
-    }
+//     }
 
-})
+// })
 
 app.post('/modify-cart', (req, resp) => {
 
@@ -210,96 +210,79 @@ app.post('/modify-cart', (req, resp) => {
 })
 
 
-app.post("/add-product", async (req, resp) => {
-    var name = req.body.name;
-    var price = req.body.price;
-    var description = req.body.description;
-
-    const addProduct = new Product({
-        name: name,
-        price: price,
-        description: description
-    })
-
-    const added = await addProduct.save()
-
-    resp.render('signup_success')
-
-})
-/
 //Sign Up form 
-app.post("/sign_up", async (req, resp) => {
-    var username = req.body.username
-    var name = req.body.name
-    var email = req.body.email
-    var phno = req.body.phno
-    var password = req.body.password
-    var confirmPassword = req.body.confirmPassword
+// app.post("/sign_up", async (req, resp) => {
+//     var username = req.body.username
+//     var name = req.body.name
+//     var email = req.body.email
+//     var phno = req.body.phno
+//     var password = req.body.password
+//     var confirmPassword = req.body.confirmPassword
 
-    // Register.exists({ email: email }, (err, result) => {
-    //     if (result) {
-    //         req.flash('error', 'Email already taken')
-    //         req.flash('name', name)
-    //         req.flash('email', email)
-    //         return resp.redirect('/register')
-    //     }
-    // })
+//     // Register.exists({ email: email }, (err, result) => {
+//     //     if (result) {
+//     //         req.flash('error', 'Email already taken')
+//     //         req.flash('name', name)
+//     //         req.flash('email', email)
+//     //         return resp.redirect('/register')
+//     //     }
+//     // })
 
-    if (password === confirmPassword) {
+//     if (password === confirmPassword) {
 
-        const registerUser = new Register({
-            username: username,
-            name: name,
-            email: email,
-            phno: phno,
-            password: password,
-        })
+//         const registerUser = new Register({
+//             username: username,
+//             name: name,
+//             email: email,
+//             phno: phno,
+//             password: password,
+//         })
 
-        await registerUser.save().then((user) => {
-            return resp.redirect('/')
-        }).catch(err => {
-            req.flash('error', 'Something went wrong')
-            return resp.render('signup_success')
-        })
-    }
-})
+//         await registerUser.save().then((user) => {
+//             return resp.redirect('/')
+//         }).catch(err => {
+//             req.flash('error', 'Something went wrong')
+//             return resp.render('signup_success')
+//         })
+//     }
+// })
 
-//vendor Signup
-app.post("/sign_up_vendor", async (req, resp) => {
-    var vendorcode = req.body.vendorcode
-    var name = req.body.name
-    var email = req.body.email
-    var phno = req.body.phno
-    var password = req.body.password
-    var confirmPassword = req.body.confirmPassword
+// //vendor Signup
+// app.post("/sign_up_vendor", async (req, resp) => {
+//     var vendorcode = req.body.vendorcode
+//     var name = req.body.name
+//     var email = req.body.email
+//     var phno = req.body.phno
+//     var password = req.body.password
+//     var confirmPassword = req.body.confirmPassword
 
-    // Register.exists({ email: email }, (err, result) => {
-    //     if (result) {
-    //         req.flash('error', 'Email already taken')
-    //         req.flash('name', name)
-    //         req.flash('email', email)
-    //         return resp.redirect('/register')
-    //     }
-    // })
+//     // Register.exists({ email: email }, (err, result) => {
+//     //     if (result) {
+//     //         req.flash('error', 'Email already taken')
+//     //         req.flash('name', name)
+//     //         req.flash('email', email)
+//     //         return resp.redirect('/register')
+//     //     }
+//     // })
 
-    if (password === confirmPassword) {
+//     if (password === confirmPassword) {
 
-        const registerUser = new Vendor({
-            vendorcode: vendorcode,
-            name: name,
-            email: email,
-            phno: phno,
-            password: password,
-        })
+//         const registerUser = new Vendor({
+//             vendorcode: vendorcode,
+//             name: name,
+//             email: email,
+//             phno: phno,
+//             password: password,
+//         })
 
-        await registerUser.save().then((user) => {
-            return resp.redirect('/')
-        }).catch(err => {
-            req.flash('error', 'Something went wrong')
-            return resp.render('signup_success')
-        })
-    }
-})
+//         await registerUser.save().then((user) => {
+//             return resp.redirect('/')
+//         }).catch(err => {
+//             req.flash('error', 'Something went wrong')
+//             return resp.render('signup_success')
+//         })
+//     }
+// })
 
 //Checkout Details
 app.post("/checkout", (req, resp) => {
