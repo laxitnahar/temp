@@ -210,23 +210,6 @@ app.post('/modify-cart', (req, resp) => {
 })
 
 
-app.post("/add-product", async (req, resp) => {
-    var name = req.body.name;
-    var price = req.body.price;
-    var description = req.body.description;
-
-    const addProduct = new Product({
-        name: name,
-        price: price,
-        description: description
-    })
-
-    const added = await addProduct.save()
-
-    resp.render('signup_success')
-
-})
-
 //Sign Up form 
 app.post("/sign_up", async (req, resp) => {
     var username = req.body.username
