@@ -15,6 +15,14 @@ const PORT = process.env.PORT || 13000
 const app = express();
 
 
+app.use(session({
+    secret: 'secretcode',
+    resave: false,
+    store: MongoDbStore.create({ mongoUrl: process.env.MONGO_URL }),
+    saveUninitialized: false,
+    cookie: { maxAge: 1000 * 60 * 60 * 24 }
+
+}))
 app.use(express.json())
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
@@ -37,14 +45,7 @@ mongoose.connect(url, {
 })
 
 const connection = mongoose.connection;
-app.use(session({
-    secret: 'secretcode',
-    resave: false,
-    store: MongoDbStore.create({ mongoUrl: process.env.MONGO_URL }),
-    saveUninitialized: false,
-    cookie: { maxAge: 1000 * 60 * 60 * 24 }
 
-}))
 
 app.use((req, res, next) => {
     res.locals.session = req.session
