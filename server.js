@@ -166,29 +166,7 @@ app.post('/update-cart', (req, resp) => {
 
 
 
-app.post("/login", async (req, resp) => {
-    var email = req.body.email
-    var password = req.body.password
 
-    const user = await Register.findOne({ email: email })
-    if (user != null && password === user.password) {
-        if (req.session.user == null) {
-            req.session.user = user
-            if (req.session.user.role === 'admin') {
-                resp.redirect('/admin')
-            } else {
-                resp.redirect('/')
-            }
-        }
-
-    } else {
-        req.flash('error', 'password Wrong')
-        console.log("User Not Found")
-        resp.redirect('/login')
-
-    }
-
-})
 
 app.post('/modify-cart', (req, resp) => {
 
