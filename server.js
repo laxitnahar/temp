@@ -39,7 +39,9 @@ const razorpay = new Razorpay({
 const url = process.env.MONGO_URL
 mongoose.connect(url, {
     useNewUrlParser: true,
-    useUnifiedTopology: true
+    useCreateIndex:true,
+    useUnifiedTopology: true,
+    useFindAndModify:true
 }).then((c) => {
     console.log(c)
 })
