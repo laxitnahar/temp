@@ -14,7 +14,7 @@ const PORT = process.env.PORT || 13000
 const app = express();
 const url = process.env.MONGO_URL
 
-mongoose.connect(url, {
+mongoose.connect("mongodb+srv://shawtemp:zxcvb@cluster0.mzw15jd.mongodb.net/?retryWrites=true&w=majority", {
     useNewUrlParser: true,
     useUnifiedTopology: true
 }).then((c) => {
