@@ -23,7 +23,7 @@ mongoose.connect(url, {
 
 let stores = new MongoDbStore({
     mongoUrl: url,
-    collection: "sessions"
+    collectionName: "sessions"
  });
 // const store = MongoDbStore.create({
 //     mongoUrl: url,
