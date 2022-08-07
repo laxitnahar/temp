@@ -21,14 +21,18 @@ mongoose.connect(url, {
     console.log(c)
 })
 
-const store = MongoDbStore.create({
+let stores = new MongoDbStore({
     mongoUrl: url,
-    secret:'wefdcw',
-    touchAfter: 24 * 60 * 60
+    collection: "sessions"
+ });
+// const store = MongoDbStore.create({
+//     mongoUrl: url,
+//     secret:'wefdcw',
+//     touchAfter: 24 * 60 * 60
     
-    })
+//     })
 app.use(session({
-    store: store,
+    store: stores,
     secret: 'secretcode',
     resave: false,
     saveUninitialized: false,
