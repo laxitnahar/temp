@@ -16,9 +16,9 @@ const app = express();
 
 
 app.use(session({
+    store: MongoDbStore.create({ mongoUrl: process.env.MONGO_URL }),
     secret: 'secretcode',
     resave: false,
-    store: MongoDbStore.create({ mongoUrl: process.env.MONGO_URL }),
     saveUninitialized: false,
     cookie: { maxAge: 1000 * 60 * 60 * 24 }
 
