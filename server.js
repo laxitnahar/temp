@@ -21,7 +21,7 @@ mongoose.connect(url, {
 })
 
 let stores = new MongoDbStore({
-    mongoUrl:  process.env.MONGO_URL
+    mongoUrl:'mongodb+srv://shawtemp:zxcvb@cluster0.mzw15jd.mongodb.net/?retryWrites=true&w=majority'
  });
 // const store = MongoDbStore.create({
 //     mongoUrl: url,
