@@ -20,8 +20,10 @@ mongoose.connect(url, {
 }).then((c) => {
     console.log(c)
 })
+
 app.use(session({
-    store: MongoDbStore.create({ mongoUrl: url}),
+    store: MongoDbStore.create({ 
+        mongoUrl: url}),
     secret: 'secretcode',
     resave: false,
     saveUninitialized: false,
@@ -42,10 +44,6 @@ const razorpay = new Razorpay({
 })
 
 
-
-const connection = mongoose.connection;
-
-
 app.use((req, res, next) => {
     res.locals.session = req.session
     let h = res.locals.session
@@ -54,10 +52,6 @@ app.use((req, res, next) => {
     // console.log(q)
     next()
 })
-
-
-
-
 
 
 const Register = require("./backend/models/register");
