@@ -9,14 +9,19 @@ const cloudinary = require("cloudinary").v2;
 const Razorpay = require('razorpay');
 const dotenv = require('dotenv')
 dotenv.config()
-mongoose.Promise = global.Promise;
 
 const PORT = process.env.PORT || 13000
 const app = express();
+const url = process.env.MONGO_URL
 
-
+mongoose.connect(url, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+}).then((c) => {
+    console.log(c)
+})
 app.use(session({
-    store: MongoDbStore.create({ mongoUrl: process.env.MONGO_URL }),
+    store: MongoDbStore.create({ mongoUrl: url}),
     secret: 'secretcode',
     resave: false,
     saveUninitialized: false,
@@ -36,13 +41,7 @@ const razorpay = new Razorpay({
     key_secret: 'L3yiJRYsLb9RbuUBMZ2BEcpi'
 })
 
-const url = process.env.MONGO_URL
-mongoose.connect(url, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-}).then((c) => {
-    console.log(c)
-})
+
 
 const connection = mongoose.connection;
 
