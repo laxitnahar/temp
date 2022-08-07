@@ -18,12 +18,10 @@ mongoose.connect(url, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 }).then((c) => {
-    console.log(c)
 })
 
 let stores = new MongoDbStore({
-    mongoUrl: url,
-    collectionName: "sessions"
+    mongoUrl:  process.env.MONGO_URL
  });
 // const store = MongoDbStore.create({
 //     mongoUrl: url,
@@ -31,6 +29,7 @@ let stores = new MongoDbStore({
 //     touchAfter: 24 * 60 * 60
     
 //     })
+console.log(process.env.MONGO_URL)
 app.use(session({
     store: stores,
     secret: 'secretcode',
